@@ -2,9 +2,7 @@ package me.rhunk.snapenhance.action.impl
 
 import android.app.ProgressDialog
 import android.content.Context
-import me.rhunk.snapenhance.Logger
-import me.rhunk.snapenhance.SharedContext
-import me.rhunk.snapenhance.bridge.TranslationWrapper
+import me.rhunk.snapenhance.bridge.wrapper.TranslationWrapper
 import kotlin.random.Random
 
 
