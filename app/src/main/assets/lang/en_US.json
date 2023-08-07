@@ -467,5 +467,13 @@
     },
     "spoof_activity": {
         "title": "Spoof Settings"
+    },
+    "random_package_name": {
+        "action_name": "Randomize Package Name",
+        "downloading_apk": "Downloading latest APK...",
+        "confirmation_body": "Are you sure you want to do this?",
+        "randomize_button": "Randomize",
+        "randomize_toast": "Randomized package name to {package_name}",
+        "randomize_failed_toast": "Failed to randomize package name!"
     }
 }

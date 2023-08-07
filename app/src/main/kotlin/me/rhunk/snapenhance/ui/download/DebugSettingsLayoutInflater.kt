@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import me.rhunk.snapenhance.R
 import me.rhunk.snapenhance.SharedContext
+import me.rhunk.snapenhance.action.impl.RandomizePackageName
 import me.rhunk.snapenhance.bridge.types.BridgeFileType
 import me.rhunk.snapenhance.ui.config.ConfigActivity
 import me.rhunk.snapenhance.ui.spoof.DeviceSpooferActivity
@@ -70,6 +71,11 @@ class DebugSettingsLayoutInflater(
             adapter = ActionListAdapter(activity, R.layout.debug_setting_item, mutableListOf<Pair<String, () -> Unit>>().apply {
                 add(SharedContext.translation["config_activity.title"] to {
                     activity.startActivity(Intent(activity, ConfigActivity::class.java))
+                })
+                add(SharedContext.translation["random_package_name.action_name"] to {
+                    confirmAction(SharedContext.translation["random_package_name.action_name"], SharedContext.translation["random_package_name.confirmation_body"]) {
+                        RandomizePackageName().run(context)
+                    }
                 })
                 add(SharedContext.translation["spoof_activity.title"] to {
                     activity.startActivity(Intent(activity, DeviceSpooferActivity::class.java))
