@@ -12,6 +12,19 @@ Please note that this project is currently in development, so bugs and crashes m
 To Download the latest stable release, please visit the [Releases](https://github.com/rhunk/SnapEnhance/releases) page.<br/>
 You can also download the latest debug build from the [Actions](https://github.com/rhunk/SnapEnhance/actions) section.<br/>
 We no longer offer official LSPatch binaries for obvious reasons. However, you're welcome to patch them yourself, as they should theoretically work without any issues.
+
+## Quick Start
+Requirements:
+- Rooted using Magisk or KernelSU
+- LSPosed installed and fully functional
+
+Although using this in an unrooted enviroment using something like LSPatch should be working fine, it is not recommended to do so, use at your own risk!
+
+1. Install the module APK from either this [Github repo](https://github.com/rhunk/SnapEnhance/releases) or the [LSPosed repo](https://modules.lsposed.org/module/me.rhunk.snapenhance)
+2. Turn on the module in LSPosed and make sure Snapchat is in scope
+3. Force Stop Snapchat
+4. Open the menu by clicking the [Settings Gear Icon](https://i.imgur.com/2grm8li.png)
+
 ## Features
 <details open>
   <summary>Spying & Privacy</summary>
@@ -46,7 +59,7 @@ We no longer offer official LSPatch binaries for obvious reasons. However, you'r
   - Disable Camera
   - Immersive Camera Preview (Fix Snapchat's camera bug)
   - Hide certain UI Elements
-  - Show Streak Experation Info
+  - Show Streak Expiration Info
   - Disable Snap Splitting
   - Disable Video Length Restriction
   - Snapchat Plus
@@ -56,6 +69,7 @@ We no longer offer official LSPatch binaries for obvious reasons. However, you'r
   - Enable Official App Appearance Settings (Darkmode)
   - Pin Conversations
   - Multi Snap Limit bypass
+  - Override Startup Page
 </details>
 
 <details open>
@@ -86,3 +100,4 @@ When redistributing the software, it must remain under the same [GPLv3](https://
 - [RevealedSoulEven](https://github.com/revealedsouleven)
 - [iBasim](https://github.com/ibasim)
 - [xerta555](https://github.com/xerta555)
+- [TheVisual](https://github.com/TheVisual)

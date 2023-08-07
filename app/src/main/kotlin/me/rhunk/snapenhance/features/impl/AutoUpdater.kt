@@ -1,19 +1,20 @@
 package me.rhunk.snapenhance.features.impl
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import me.rhunk.snapenhance.BuildConfig
 import me.rhunk.snapenhance.Logger
 import me.rhunk.snapenhance.config.ConfigProperty
 import me.rhunk.snapenhance.features.Feature
 import me.rhunk.snapenhance.features.FeatureLoadParams
+import me.rhunk.snapenhance.ui.ViewAppearanceHelper
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
@@ -42,6 +43,11 @@ class AutoUpdater : Feature("AutoUpdater", loadParams = FeatureLoadParams.ACTIVI
         }
     }
 
+    @Suppress("DEPRECATION")
+    private fun getCPUArchitecture(): String {
+        return Build.CPU_ABI
+    }
+
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     fun checkForUpdates(): String? {
         val endpoint = Request.Builder().url("https://api.github.com/repos/rhunk/SnapEnhance/releases").build()
@@ -57,11 +63,18 @@ class AutoUpdater : Feature("AutoUpdater", loadParams = FeatureLoadParams.ACTIVI
         val latestVersion = latestRelease.getString("tag_name")
         if (latestVersion.removePrefix("v") == BuildConfig.VERSION_NAME) return null
 
+        val architectureName = when (getCPUArchitecture()) {
+            "armeabi-v7a" -> "armv7"
+            "armeabi" -> "armv7"
+            "arm64-v8a" -> "armv8"
+            else -> { throw Throwable("Failed getting architecture") }
+        }
+
         val releaseContentBody = latestRelease.getString("body")
-        val downloadEndpoint = latestRelease.getJSONArray("assets").getJSONObject(0).getString("browser_download_url")
+        val downloadEndpoint = "https://github.com/rhunk/SnapEnhance/releases/download/${latestVersion}/app-${latestVersion.removePrefix("v")}-${architectureName}-release-signed.apk"
 
         context.runOnUiThread {
-            AlertDialog.Builder(context.mainActivity)
+            ViewAppearanceHelper.newAlertDialogBuilder(context.mainActivity)
                 .setTitle(context.translation["auto_updater.dialog_title"])
                 .setMessage(
                     context.translation.format("auto_updater.dialog_message",
@@ -103,7 +116,6 @@ class AutoUpdater : Feature("AutoUpdater", loadParams = FeatureLoadParams.ACTIVI
                     ))
                 }.show()
         }
-
         return latestVersion
     }
 }

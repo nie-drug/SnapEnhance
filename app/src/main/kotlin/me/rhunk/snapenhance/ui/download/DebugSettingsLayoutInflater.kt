@@ -11,9 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import me.rhunk.snapenhance.R
 import me.rhunk.snapenhance.SharedContext
-import me.rhunk.snapenhance.action.impl.RandomizePackageName
-import me.rhunk.snapenhance.bridge.common.impl.file.BridgeFileType
+import me.rhunk.snapenhance.bridge.types.BridgeFileType
 import me.rhunk.snapenhance.ui.config.ConfigActivity
+import me.rhunk.snapenhance.ui.spoof.DeviceSpooferActivity
 import java.io.File
 
 class ActionListAdapter(
@@ -71,10 +71,8 @@ class DebugSettingsLayoutInflater(
                 add(SharedContext.translation["config_activity.title"] to {
                     activity.startActivity(Intent(activity, ConfigActivity::class.java))
                 })
-                add(SharedContext.translation["random_package_name.action_name"] to {
-                    confirmAction(SharedContext.translation["random_package_name.action_name"], SharedContext.translation["random_package_name.confirmation_body"]) {
-                        RandomizePackageName().run(context)
-                    }
+                add(SharedContext.translation["spoof_activity.title"] to {
+                    activity.startActivity(Intent(activity, DeviceSpooferActivity::class.java))
                 })
                 add(debugSettingsTranslation["clear_cache_title"] to {
                     context.cacheDir.listFiles()?.forEach {
@@ -82,6 +80,7 @@ class DebugSettingsLayoutInflater(
                     }
                     showSuccessToast()
                 })
+
                 BridgeFileType.values().forEach { fileType ->
                     val actionName = debugSettingsTranslation.format("clear_file_title", "file_name" to fileType.displayName)
                     add(actionName to {
